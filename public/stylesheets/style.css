@@ -1,8 +1,15 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.result-table {
+    margin: 20px 0;
+    width: 100%;
+    border-collapse: collapse;
 }
-
-a {
-  color: #00B7FF;
+.result-table td { padding: 8px; }
+.result-table > tbody > tr > td:first-child {
+    width: 25%;
+    max-width: 300px;
+    text-align: right;
+}
+.result-table td table {
+    background-color: lightblue;
+    text-align: right;
 }

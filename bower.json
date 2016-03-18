@@ -1,0 +1,33 @@
+{
+  "name": "mean-beginner",
+  "description": "",
+  "main": "",
+  "authors": [
+    "laixiangran <laixiangran@163.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "MongoDB",
+    "Express",
+    "Angular",
+    "node"
+  ],
+  "homepage": "https://github.com/laixiangran/mean-beginner",
+  "moduleType": [
+    "es6"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "angular-resource": "~1.5.1",
+    "angular": "~1.5.1",
+    "angular-ui-router": "~0.2.18"
+  }
+}
