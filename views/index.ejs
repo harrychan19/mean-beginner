@@ -2,28 +2,30 @@
 <html lang="zh-cn" ng-app="meanApp">
 <head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css"/>
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
     <script src="/angular/angular.min.js"></script>
     <script src="/angular-resource/angular-resource.min.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/javascripts/app.js"></script>
     <script src="/javascripts/controllers.js"></script>
+    <script src="/javascripts/services.js"></script>
 </head>
 <body ng-controller="PollListCtrl">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
+    <nav class="navbar navbar-inverse docs-navbar-primary">
+        <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#"><%= title %></a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a ui-sref="new">燃·展现</a></li>
-                    <li><a ui-sref="polls">燃·心得</a></li>
+                    <li class="active"><a ui-sref="polls">首页</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div ui-view></div>
+    <div class="container">
+        <div ui-view></div>
+    </div>
 </body>
 </html>

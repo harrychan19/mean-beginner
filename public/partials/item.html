@@ -1,11 +1,11 @@
 <div class="page-header">
-    <h1>View Poll</h1>
+    <h1>查看投票</h1>
 </div>
 <div class="well well-lg">
-    <strong>Question</strong><br>{{poll.question}}
+    <strong>问题</strong><br>{{poll.question}}
 </div>
 <div ng-hide="poll.userVoted">
-    <p class="lead">Please select one of the following options.</p>
+    <p class="lead">请选择以下选择之一：</p>
     <form role="form" ng-submit="vote()">
         <div ng-repeat="choice in poll.choices" class="radio">
             <label>
@@ -14,15 +14,16 @@
                 {{choice.text}}
             </label>
         </div>
-        <p><hr></p>
+        <hr>
         <div class="row">
             <div class="col-xs-6">
-                <a href="polls" class="btn btn-default" role="button"><span
-                        class="glyphicon glyphicon-arrow-left"></span> Back to Poll
+                <a ui-sref="polls" class="btn btn-default" role="button">
+                    <span class="glyphicon glyphicon-arrow-left"></span>返回投票列表
+                </a>
             </div>
             <div class="col-xs-6">
                 <button class="btn btn-primary pull-right" type="submit">
-                    Vote &raquo;</button>
+                    投票 &raquo;</button>
             </div>
         </div>
     </form>
@@ -33,20 +34,26 @@
         <tr ng-repeat="choice in poll.choices">
             <td>{{choice.text}}</td>
             <td>
-                <table style="width: {{choice.votes.length
-	/poll.totalVotes*100}}%;">
+                <table style="width: {{choice.votes.length/poll.totalVotes*100}}%;">
                     <tr><td>{{choice.votes.length}}</td></tr>
                 </table>
             </td>
         </tr>
         </tbody>
     </table>
-    <p><em>{{poll.totalVotes}} votes counted so far. <span
-            ng-show="poll.userChoice">You voted for <strong>{{poll.userChoice.text}}
-    </strong>.</span></em></p>
-    <p><hr></p>
-    <p><a href="polls" class="btn btn-default" role="button">
-        <span class="glyphicon glyphicon-arrow-left"></span> Back to
-        Poll List</a></p>
+    <p>
+        <em>
+            {{poll.totalVotes}} 到目前为止的投票。
+            <span ng-show="poll.userChoice">
+                你投向<strong>{{poll.userChoice.text}}</strong>.
+            </span>
+        </em>
+    </p>
+    <hr>
+    <p>
+        <a ui-sref="polls" class="btn btn-default" role="button">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+            返回投票列表
+        </a>
+    </p>
 </div>
-<p>&nbsp;</p>

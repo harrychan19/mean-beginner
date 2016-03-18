@@ -20,11 +20,11 @@ meanApp.config(["$stateProvider",
         $urlRouterProvider.otherwise("/polls");
         $stateProvider
             .state("new", {
-                url: "/users",
+                url: "/new",
                 templateUrl: "/partials/new.html",
                 controller: "PollNewCtrl"
             })
-            .state("poll/:pollId", {
+            .state("poll", {
                 url: "/poll/:pollId",
                 templateUrl: "/partials/item.html",
                 controller: "PollItemCtrl"

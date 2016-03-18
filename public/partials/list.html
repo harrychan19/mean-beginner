@@ -1,14 +1,14 @@
 <div class="page-header">
-    <h1>Poll List</h1>
+    <h1>投票列表</h1>
 </div>
 <div class="row">
     <div class="col-xs-5">
         <a ui-sref="new" class="btn btn-default"><span class="glyphicon
-glyphicon-plus"></span> New Poll</a>
+glyphicon-plus"></span>新投票</a>
     </div>
     <div class="col-xs-7">
         <input type="text" class="form-control" ng-model="query"
-               placeholder="Search for a poll">
+               placeholder="查询投票">
     </div>
 </div>
 <div class="row"><div class="col-xs-12">
@@ -17,14 +17,13 @@ glyphicon-plus"></span> New Poll</a>
     <ul ng-switch-when="0">
         <li>
             <em>
-                No polls in database. Would you like to
-                <a ui-sref="new">create one</a>?
+                没有投票，是否<a ui-sref="new">创建新投票</a>？
             </em>
         </li>
     </ul>
     <ul ng-switch-default>
         <li ng-repeat="poll in polls | filter:query">
-            <a ui-sref="poll/:({pollId: poll.id})">{{poll.question}}</a>
+            <a ui-sref="poll({pollId: poll._id})">{{poll.question}}</a>
         </li>
     </ul>
 </div>
