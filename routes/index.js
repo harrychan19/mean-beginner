@@ -105,11 +105,10 @@ router.post("/polls", function(req, res) {
 // 保存投票结果（使用Socket）
 router.vote = function(socket) {
     socket.on("send:vote", function(data) {
-        var ip = socket.handshake.headers["x-forwarded-for"] ||
-            socket.handshake.address.address;
+        var ip = socket.handshake.headers["x-forwarded-for"] || socket.handshake.address.address;
         Poll.findById(data.poll_id, function(err, poll) {
             var choice = poll.choices.id(data.choice);
-            choice.votes.push({ ip: ip });
+            choice.votes.push({ip: ip});
             poll.save(function(err, doc) {
                 var theDoc = {
                     question: doc.question, _id: doc._id, choices: doc.choices,
@@ -123,7 +122,10 @@ router.vote = function(socket) {
                         theDoc.ip = ip;
                         if(vote.ip === ip) {
                             theDoc.userVoted = true;
-                            theDoc.userChoice = { _id: choice._id, text: choice.text };
+                            theDoc.userChoice = {
+                                _id: choice._id,
+                                text: choice.text
+                            };
                         }
                     }
                 }
