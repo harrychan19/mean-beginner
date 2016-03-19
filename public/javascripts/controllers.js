@@ -3,23 +3,59 @@
  * homepage: http://www.cnblogs.com/laixiangran/
  */
 
-meanApp.controller("PollListCtrl", ["$scope", "Poll", function($scope, Poll) {
-    $scope.polls = Poll.query();
+meanApp.controller("PollListCtrl", ["$scope", "PollServer",
+    function($scope, PollServer) {
+        $scope.polls = PollServer.query();
 }]);
 
-meanApp.controller("PollItemCtrl", ["$rootScope", "$scope", "Poll", function($rootScope, $scope, Poll) {
-    $scope.poll = Poll.get({pollId: $rootScope.$stateParams.pollId});
-    $scope.vote = function() {};
+meanApp.controller("PollItemCtrl", ["$rootScope", "$scope", "PollServer", "socketServer",
+    function($rootScope, $scope, PollServer, socketServer) {
+        var pollId = $rootScope.$stateParams.pollId;
+
+        $scope.poll = PollServer.get({
+            pollId: pollId
+        });
+
+        socketServer.on("myvote", function(data) {
+            if(data._id === pollId) {
+                $scope.poll = data;
+            }
+        });
+
+        socketServer.on("vote", function(data) {
+            if(data._id === pollId) {
+                $scope.poll.choices = data.choices;
+                $scope.poll.totalVotes = data.totalVotes;
+            }
+        });
+
+        $scope.vote = function() {
+            var pollId = $scope.poll._id,
+                choiceId = $scope.poll.userVote;
+            if(choiceId) {
+                var voteObj = {
+                    poll_id: pollId,
+                    choice: choiceId
+                };
+                socketServer.emit("send:vote", voteObj);
+            } else {
+                alert("You must select an option to vote for");
+            }
+        };
 }]);
 
-meanApp.controller("PollNewCtrl", ["$scope", "$location", "Poll", function($scope, $location, Poll) {
+meanApp.controller("PollNewCtrl", ["$scope", "$location", "PollServer", function($scope, $location, PollServer) {
     $scope.poll = {
         question: "",
-        choices: [ { text: "" }, { text: "" }, { text: "" }]
+        choices: [{text: ""}, {text: ""}, {text: ""}]
     };
+
     $scope.addChoice = function() {
-        $scope.poll.choices.push({ text: "" });
+        $scope.poll.choices.push({
+            text: ""
+        });
     };
+
     $scope.createPoll = function() {
         var poll = $scope.poll;
         if(poll.question.length > 0) {
@@ -31,7 +67,7 @@ meanApp.controller("PollNewCtrl", ["$scope", "$location", "Poll", function($scop
                 }
             }
             if(choiceCount > 1) {
-                var newPoll = new Poll(poll);
+                var newPoll = new PollServer(poll);
                 newPoll.$save(function(p, resp) {
                     if(!p.error) {
                         $location.path("polls");
