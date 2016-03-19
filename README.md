@@ -1,4 +1,4 @@
-#第一个MEAN全堆栈javascript开发框架示例
+#MEAN全堆栈javascript开发框架示例
 
 ##关于MEAN
 
