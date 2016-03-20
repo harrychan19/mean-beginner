@@ -31,12 +31,12 @@ var Poll = db.model("polls", PollSchema);
 // 定义路由
 var router = express.Router();
 
-// 定义主页的路由
+// 主页
 router.get("/", function(req, res) {
     res.render("index", {title: "投票系统"});
 });
 
-// 获取投票列表的路由
+// 获取投票列表
 router.get("/polls/polls", function(req, res) {
     // 查询模型 Model.find用法：http://mongoosejs.com/docs/api.html#model_Model.find
     Poll.find({}, "question", function(error, polls) {
@@ -44,7 +44,7 @@ router.get("/polls/polls", function(req, res) {
     });
 });
 
-// 获取单个投票的路由（带有投票的id）
+// 获取单个投票（带有投票的id）
 router.get("/polls/:id", function(req, res) {
     var pollId = req.params.id;
 
@@ -82,7 +82,7 @@ router.get("/polls/:id", function(req, res) {
     });
 });
 
-// 新增投票的路由
+// 新增投票
 router.post("/polls", function(req, res) {
     var reqBody = req.body,
         choices = reqBody.choices.filter(function(v) {
@@ -93,11 +93,44 @@ router.post("/polls", function(req, res) {
     var poll = new Poll(pollObj);
 
     // 保存模型 Model.save用法：http://mongoosejs.com/docs/api.html#model_Model-save
-    poll.save(function(err, doc) {
-        if(err || !doc) {
-            throw "Error";
+    poll.save(function(err, poll) {
+        if(err || !poll) {
+            res.json({error: "add error"});
+            throw err;
         } else {
-            res.json(doc);
+            res.json(poll);
+        }
+    });
+});
+
+// 修改投票
+router.post("/updatePoll", function(req, res) {
+    var reqBody = req.body,
+        choices = reqBody.choices.filter(function(v) {
+            return v.text != "";
+        }),
+        pollObj = {question: reqBody.question, choices: choices};
+
+    // 修改模型 Model.findByIdAndUpdate用法：http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate
+    Poll.findByIdAndUpdate(reqBody._id, pollObj, function(err, poll) {
+        if(err || !poll) {
+            res.json({error: "add error"});
+            throw err;
+        } else {
+            pollObj._id = reqBody._id;
+            res.json(pollObj);
+        }
+    });
+});
+
+// 删除投票
+router.get("/delPoll/:id", function(req, res) {
+    var pollId = req.params.id;
+    Poll.findByIdAndRemove(pollId, function(err, poll) {
+        if (err) {
+            res.json({});
+        } else {
+            res.json({state: "success"});
         }
     });
 });

@@ -5,7 +5,8 @@
 
 var meanApp = angular.module("meanApp", ["ui.router", "ngResource"]);
 
-meanApp.run(["$rootScope",
+meanApp.run([
+    "$rootScope",
     "$state",
     "$stateParams",
     function($rootScope, $state, $stateParams) {
@@ -14,7 +15,8 @@ meanApp.run(["$rootScope",
     }
 ]);
 
-meanApp.config(["$stateProvider",
+meanApp.config([
+    "$stateProvider",
     "$urlRouterProvider",
     function($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("/polls");

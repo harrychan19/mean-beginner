@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test": "gulp watch"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -15,5 +16,9 @@
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.4.5"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-livereload": "^3.8.1"
   }
 }

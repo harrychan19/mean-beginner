@@ -1,59 +1,55 @@
 <div class="page-header">
-    <h1>查看投票</h1>
+    <h1>进行投票</h1>
 </div>
+<p>
+    <a ui-sref="polls" class="btn btn-default" role="button">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        返回列表
+    </a>
+</p>
 <div class="well well-lg">
-    <strong>问题</strong><br>{{poll.question}}
-</div>
-<div ng-hide="poll.userVoted">
-    <p class="lead">请选择以下选择之一：</p>
-    <form role="form" ng-submit="vote()">
-        <div ng-repeat="choice in poll.choices" class="radio">
-            <label>
-                <input type="radio" name="choice" ng-model="poll.userVote"
-                       value="{{choice._id}}">
-                {{choice.text}}
-            </label>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-xs-6">
-                <a ui-sref="polls" class="btn btn-default" role="button">
-                    <span class="glyphicon glyphicon-arrow-left"></span>返回投票列表
-                </a>
+    <strong>问题：</strong>{{poll.question}}
+    <hr/>
+    <div ng-hide="poll.userVoted">
+        <form role="form" ng-submit="vote()">
+            <div ng-repeat="choice in poll.choices" class="radio">
+                <label>
+                    <input type="radio" name="choice" ng-model="poll.userVote"
+                           value="{{choice._id}}">
+                    {{choice.text}}
+                </label>
             </div>
-            <div class="col-xs-6">
-                <button class="btn btn-primary pull-right" type="submit">
-                    投票 &raquo;</button>
+            <div class="row">
+                <div class="col-xs-6">
+                    <button class="btn btn-primary btn-sm pull-left" type="submit">投票</button>
+                </div>
+            </div>
+            <hr>
+            <div class="alert alert-warning" role="alert">投票之后才能看投票结果！</div>
+        </form>
+    </div>
+    <div ng-show="poll.userVoted">
+        <div ng-repeat="choice in poll.choices">
+            <strong>{{choice.text}}：</strong>
+            <div class="progress">
+                <div ng-class="setStyle(choice.votes.length/poll.totalVotes*100)" role="progressbar"
+                     style="min-width: 2em; width: {{choice.votes.length/poll.totalVotes*100}}%;">
+                    {{choice.votes.length}}
+                </div>
             </div>
         </div>
-    </form>
-</div>
-<div ng-show="poll.userVoted">
-    <table class="result-table">
-        <tbody>
-        <tr ng-repeat="choice in poll.choices">
-            <td>{{choice.text}}</td>
-            <td>
-                <table style="width: {{choice.votes.length/poll.totalVotes*100}}%;">
-                    <tr><td>{{choice.votes.length}}</td></tr>
-                </table>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <p>
-        <em>
-            {{poll.totalVotes}} 到目前为止的投票。
-            <span ng-show="poll.userChoice">
-                你投向<strong>{{poll.userChoice.text}}</strong>.
-            </span>
-        </em>
-    </p>
-    <hr>
-    <p>
-        <a ui-sref="polls" class="btn btn-default" role="button">
-            <span class="glyphicon glyphicon-arrow-left"></span>
-            返回投票列表
-        </a>
-    </p>
+        <div class="alert alert-success" role="alert">
+            <p>
+                总投票数：<strong>{{poll.totalVotes}}</strong>
+            </p>
+            <p>
+                <span ng-show="poll.userChoice">
+                    你的选择是：<strong>{{poll.userChoice.text}}</strong>
+                </span>
+            </p>
+            <p>
+                谢谢您的投票！
+            </p>
+        </div>
+    </div>
 </div>
