@@ -1,17 +1,13 @@
-.result-table {
-    margin: 20px 0;
-    width: 100%;
-    border-collapse: collapse;
+body {
+    animation:bgImages 60s ease 0s infinite alternate;
 }
-.result-table td { padding: 8px; }
-.result-table > tbody > tr > td:first-child {
-    width: 25%;
-    max-width: 300px;
-    text-align: right;
-}
-.result-table td table {
-    background-color: lightblue;
-    text-align: right;
+
+@keyframes bgImages {
+    0%{background: url("../images/1.jpg");}
+    25%{background: url("../images/2.jpg");}
+    50%{background: url("../images/3.jpg");}
+    75%{background: url("../images/4.jpg");}
+    100%{background: url("../images/5.jpg");}
 }
 
 .docs-navbar-primary {
