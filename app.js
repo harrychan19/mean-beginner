@@ -6,10 +6,10 @@
 var express = require("express"),
     path = require("path"),
     http = require("http"),
-    favicon = require("serve-favicon"),
-    logger = require("morgan"),
-    cookieParser = require("cookie-parser"),
-    bodyParser = require("body-parser"),
+    favicon = require("serve-favicon"), // 网站图标
+    logger = require("morgan"),// 记录HTTP请求并输出到命令行
+    cookieParser = require("cookie-parser"), // 解析请求Cookie
+    bodyParser = require("body-parser"), // 解析请求body
     routes = require("./routes/index");
 
 var app = express();

@@ -4,6 +4,8 @@
  */
 
 var express = require("express");
+var Markdown = require('markdown-it');
+
 /**
  * 导入mongoose模块
  * API：http://mongoosejs.com/docs/api.html
@@ -27,6 +29,12 @@ var PollSchema = require("../models/Poll.js").PollSchema;
  * model的用法：http://mongoosejs.com/docs/api.html#index_Mongoose-model
  */
 var Poll = db.model("polls", PollSchema);
+
+// markdown转html
+function markdown2html(markdownString) {
+    var md = new Markdown();
+    return md.render(markdownString);
+}
 
 // 定义路由
 var router = express.Router();
@@ -85,11 +93,13 @@ router.get("/polls/:id", function(req, res) {
 // 新增投票
 router.post("/polls", function(req, res) {
     var reqBody = req.body,
-        choices = reqBody.choices.filter(function(v) {
-            return v.text != "";
+        choices = reqBody.choices.filter(function(choice) {
+            return choice.text != "";
         }),
-        pollObj = {question: reqBody.question, choices: choices};
-
+        pollObj = {
+            question: reqBody.question,
+            choices: choices
+        };
     var poll = new Poll(pollObj);
 
     // 保存模型 Model.save用法：http://mongoosejs.com/docs/api.html#model_Model-save

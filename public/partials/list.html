@@ -25,7 +25,7 @@
         <tbody>
             <tr ng-switch-when="0" class="text-center">
                 <td colspan="2">
-                    没有投票，是否<a ui-sref="new">创建新投票</a>？
+                    <em>没有投票，是否<a ui-sref="new">创建新投票</a>？</em>
                 </td>
             </tr>
             <tr ng-repeat="poll in polls | filter:query" class="{{poll._id}}">
