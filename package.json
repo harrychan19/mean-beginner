@@ -2,14 +2,14 @@
   "name": "mean-beginner",
   "version": "1.0.0",
   "main": "app.js",
-  "description": "MEAN - È«Õ»javascript¿ª·¢¿ò¼Ü",
+  "description": "MEAN - å…¨æ ˆjavascriptå¼€å‘æ¡†æ¶",
   "homepage": "https://github.com/laixiangran/mean-beginner",
   "repository": {
     "type": "git",
     "url": "https://github.com/laixiangran/mean-beginner.git"
   },
   "author": {
-    "name": "ÀµÏéÈ¼",
+    "name": "èµ–ç¥¥ç‡ƒ",
     "email": "laixiangran@163.com",
     "bolg": "http://www.cnblogs.com/laixiangran",
     "homepage": "http://www.laixiangran.cn"
