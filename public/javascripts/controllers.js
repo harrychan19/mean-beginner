@@ -1,6 +1,6 @@
 /**
  * Created by laixiangran on 2016/3/18.
- * homepage: http://www.cnblogs.com/laixiangran/
+ * homepage: http://www.laixiangran.cn
  */
 
 meanApp.controller("PollListCtrl", [

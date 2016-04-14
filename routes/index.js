@@ -4,7 +4,7 @@
  */
 
 var express = require("express");
-var Markdown = require('markdown-it');
+var Markdown = require("markdown-it");
 
 /**
  * 导入mongoose模块
